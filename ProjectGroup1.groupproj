@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{52B0FCAB-42CF-4F5C-9896-B9A6DCCD4DBE}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="Components\RoundedPanel\TCustomPack.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="AppWithCustomComponents\AppWithCustomComponents.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="TCustomPack">
+        <MSBuild Projects="Components\RoundedPanel\TCustomPack.dproj"/>
+    </Target>
+    <Target Name="TCustomPack:Clean">
+        <MSBuild Projects="Components\RoundedPanel\TCustomPack.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="TCustomPack:Make">
+        <MSBuild Projects="Components\RoundedPanel\TCustomPack.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="AppWithCustomComponents">
+        <MSBuild Projects="AppWithCustomComponents\AppWithCustomComponents.dproj"/>
+    </Target>
+    <Target Name="AppWithCustomComponents:Clean">
+        <MSBuild Projects="AppWithCustomComponents\AppWithCustomComponents.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="AppWithCustomComponents:Make">
+        <MSBuild Projects="AppWithCustomComponents\AppWithCustomComponents.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="TCustomPack;AppWithCustomComponents"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="TCustomPack:Clean;AppWithCustomComponents:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="TCustomPack:Make;AppWithCustomComponents:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
